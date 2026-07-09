@@ -1,0 +1,29 @@
+[
+    {
+        "_id": "usuario01",
+        "nombre": "Carlos",
+        "email": "carlos@gmail.com",
+        "fecha_registro": "2025-01-06",
+        "preferencias": ["Rock", "Pop", "Metal"]
+    },
+    {
+        "_id": "cancion01",
+        "titulo": "Hasta que el cuerpo aguante",
+        "artista": "Mago de Oz",
+        "album": "Finisterra",
+        "duracion": "4:33",
+        "genero": "Rock"
+    },
+    {
+        "_id": "playlist01",
+        "nombre": "Playlist para volverse locos",
+        "descripcion": "Una playlist para que te vuelvas loco",
+        "creador": "usuario01",
+        "canciones": [
+            "cancion01",
+            "cancion02",
+            "cancion03"
+        ],
+        "fecha_creacion": "2025-01-06"
+    }
+]
