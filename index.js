@@ -252,5 +252,5 @@ app.delete('/api/playlists/:id', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`El backend está escuchando en http://localhost:${PORT}`);
+    console.log(`El backend está viendo en http://localhost:${PORT}`);
 });
