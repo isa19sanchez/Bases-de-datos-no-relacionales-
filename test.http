@@ -1,0 +1,136 @@
+### PRUEBAS DE CANCIONES
+
+
+### 1. Crear una nueva canción (POST)
+POST http://localhost:3000/api/v1/canciones
+Content-Type: application/json
+
+{
+    "_id": "cancion01",
+    "titulo": "Cruel Summer",
+    "artista": "Taylor Swift",
+    "album": "Lover",
+    "duracion_minutos": 2.58,
+    "genero": "Pop"
+}
+
+
+### 2. Consultar todas las canciones (GET)
+GET http://localhost:3000/api/v1/canciones
+
+
+
+### 3. Actualizar una canción completa (PUT)
+PUT http://localhost:3000/api/v1/canciones/cancion01
+Content-Type: application/json
+
+{
+    "titulo": "Cruel Summer (Live Version)",
+    "album": "Lover Live"
+}
+
+
+
+### 4. Actualizar SOLO la duración de una canción (PATCH)
+PATCH http://localhost:3000/api/v1/canciones/actualizar-duracion/cancion01
+Content-Type: application/json
+
+{
+    "duracion_minutos": 3.45
+}
+
+
+### 5. Eliminar una canción (DELETE)
+DELETE http://localhost:3000/api/v1/canciones/cancion01
+
+
+
+### PRUEBAS DE PLAYLISTS
+
+
+### 1. Crear una nueva playlist (POST)
+POST http://localhost:3000/api/v1/playlists
+Content-Type: application/json
+
+{
+    "_id": "playlist01",
+    "nombre": "Mis Favoritas de Taylor",
+    "descripcion": "Una playlist con las mejores canciones de Taylor Swift",
+    "creador": "Isabella",
+    "canciones": ["cancion01"],
+    "fecha_creacion": "2026-07-15T00:00:00.000Z",
+    "estado": "activo"
+}
+
+
+
+### 2. Consultar todas las playlists (GET)
+GET http://localhost:3000/api/v1/playlists
+
+
+
+### 3. Actualizar una playlist completa (PUT)
+PUT http://localhost:3000/api/v1/playlists/playlist01
+Content-Type: application/json
+
+{
+    "nombre": "Favoritas Pop 2026",
+    "descripcion": "Mix de pop actualizado"
+}
+
+
+
+### 4. Actualizar SOLO el estado de una playlist (PATCH)
+PATCH http://localhost:3000/api/v1/playlists/actualizar-estado/playlist01
+Content-Type: application/json
+
+{
+    "estado": "finalizado"
+}
+
+### 5. Eliminar una playlist (DELETE)
+DELETE http://localhost:3000/api/v1/playlists/playlist01
+
+
+
+### PRUEBAS DE USUARIOS
+
+### 1. Consultar todos los usuarios (GET)
+GET http://localhost:3000/api/v1/usuarios
+
+### 2. Crear un nuevo usuario (POST)
+POST http://localhost:3000/api/v1/usuarios
+Content-Type: application/json
+
+{
+    "_id": "usuario02",
+    "nombre": "Isabella",
+    "email": "isabella@correo.com",
+    "fecha_registro": "2026-07-15",
+    "preferencias": ["Pop", "Indie"],
+    "rol": "usuario"
+}
+
+
+### 3. Actualizar un usuario completo (PUT)
+PUT http://localhost:3000/api/v1/usuarios/usuario01
+Content-Type: application/json
+
+{
+    "nombre": "Isabella Dev",
+    "preferencias": ["Pop", "Indie", "Rock"]
+}
+
+
+
+### 4. Actualizar SOLO el rol de un usuario (PATCH)
+PATCH http://localhost:3000/api/v1/usuarios/actualizar-rol/usuario01
+Content-Type: application/json
+
+{
+    "rol": "administrador"
+}
+
+
+### 5. Eliminar un usuario (DELETE)
+DELETE http://localhost:3000/api/v1/usuarios/usuario01

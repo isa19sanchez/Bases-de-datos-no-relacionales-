@@ -16,23 +16,24 @@ const middlewareRevision = (req, res, next) => {
 
 app.use(middlewareRevision);
 
-// Conexión a la base de datos (necesaria para que tus rutas funcionen)
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("Conexión exitosa"))
-    .catch(err => console.error("No se pudo conectar", err));
 
-// Rutas del profesor + tus 3 nuevos archivos de rutas
-const healthRoutes = require('./routes/salud');
-const cancionesRoutes = require('./routes/canciones');
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log("Conexión exitosa a MongoDB Atlas"))
+    .catch(err => console.error("No se pudo conectar a Mongo:", err));
+
+
 const usuariosRoutes = require('./routes/usuarios');
+
+const cancionesRoutes = require('./routes/canciones');
+
 const playlistsRoutes = require('./routes/playlists');
 
-app.use('/api/v1', healthRoutes);
-app.use('/api/v1', cancionesRoutes);
+
 app.use('/api/v1', usuariosRoutes);
-app.use('/api/v1', playlistsRoutes);
+app.use('/api/v1', cancionesRoutes); 
+app.use('/api/v1', playlistsRoutes); 
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log("Servidor escuchando en el puerto localhost:" + PORT);
+    console.log(`Servidor escuchando en el puerto localhost:${PORT}`);
 });
