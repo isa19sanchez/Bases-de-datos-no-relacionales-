@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const playlistSchema = new mongoose.Schema({
-    _id: {
-        type: String,
-        required: [true, "El ID de la playlist es obligatorio"]
-    },
     nombre: {
         type: String,
         required: [true, "El nombre de la playlist es obligatorio"],
