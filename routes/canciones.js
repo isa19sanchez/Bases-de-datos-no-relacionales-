@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const cancionesController = require('../controllers/cancionesController');
+const cancionController = require('../controllers/cancionesController'); // ✅ corregido
 
-router.get('/canciones', cancionesController.obtenerCanciones);
-router.post('/canciones', cancionesController.crearCancion);
-router.put('/canciones/:id', cancionesController.actualizarCancion);
-router.delete('/canciones/:id', cancionesController.eliminarCancion);
-router.patch('/canciones/actualizar-duracion/:id', cancionesController.actualizarDuracionCancion);
+router.get('/canciones', cancionController.obtenerCanciones);
+router.post('/canciones', cancionController.crearCancion);
+router.put('/canciones/:id', cancionController.actualizarCancion);
+router.delete('/canciones/:id', cancionController.eliminarCancion);
+router.patch('/canciones/actualizar-duracion/:id', cancionController.actualizarDuracionCancion);
 
 module.exports = router;

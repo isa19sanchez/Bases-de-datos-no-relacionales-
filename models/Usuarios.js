@@ -18,11 +18,11 @@ const usuarioSchema = new mongoose.Schema({
         lowercase: true
     },
     fecha_registro: {
-        type: String, // Se guarda como String "YYYY-MM-DD" según tu imagen
+        type: String,
         required: [true, "La fecha de registro es obligatoria"]
     },
     preferencias: {
-        type: [String], // Un array de textos (ej: ["Rock", "Pop", "Metal"])
+        type: [String], 
         default: []
     },
     rol: {

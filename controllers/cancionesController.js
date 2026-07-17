@@ -1,6 +1,6 @@
 const Cancion = require('../models/Canciones');
 
-const obtenerCanciones = async (req, res) => {
+exports.obtenerCanciones = async (req, res) => {
     try {
         const canciones = await Cancion.find();
         res.json(canciones);
@@ -10,22 +10,23 @@ const obtenerCanciones = async (req, res) => {
     }
 };
 
-const crearCancion = async (req, res) => {
+exports.crearCancion = async (req, res) => {
     try {
         const nuevaCancion = new Cancion(req.body);
-        const resultado = await nuevaCancion.save();
+        await nuevaCancion.save();
+
         res.status(201).json({
-            mensaje: "Canción creada correctamente",
-            id_generado: resultado._id,
-            datosGuardados: resultado
+            mensaje: "Canción creada con éxito",
+            cancion: nuevaCancion
         });
     } catch (error) {
-        console.error(error);
-        res.status(400).json({ error: "Error al guardar la canción. Verifica los campos requeridos.", detalle: error.message });
+        res.status(400).json({
+            error: error.message || "Error al crear la canción"
+        });
     }
 };
 
-const actualizarCancion = async (req, res) => {
+exports.actualizarCancion = async (req, res) => {
     try {
         const cancionActualizada = await Cancion.findByIdAndUpdate(
             req.params.id,
@@ -40,17 +41,15 @@ const actualizarCancion = async (req, res) => {
     }
 };
 
-const eliminarCancion = async (req, res) => {
+exports.eliminarCancion = async (req, res) => {
     try {
         const cancionEliminada = await Cancion.findByIdAndDelete(req.params.id);
-        
         if (!cancionEliminada) {
             return res.status(404).json({ error: "Canción no encontrada o ya fue eliminada" });
         }
-
-        res.json({ 
-            mensaje: "Canción eliminada correctamente", 
-            datosEliminados: cancionEliminada 
+        res.json({
+            mensaje: "Canción eliminada correctamente",
+            datosEliminados: cancionEliminada
         });
     } catch (error) {
         console.error(error);
@@ -58,14 +57,12 @@ const eliminarCancion = async (req, res) => {
     }
 };
 
-// NUEVO MÉTODO PATCH: Actualizar solo la duración de la canción
-const actualizarDuracionCancion = async (req, res) => {
+exports.actualizarDuracionCancion = async (req, res) => {
     try {
         const idCancion = req.params.id;
         const { duracion_minutos: nuevaDuracion } = req.body;
 
-        // Validamos que el campo haya sido enviado y no sea negativo o nulo
-        if (nuevaDuracion == null) {
+        if (nuevaDuracion === undefined) {
             return res.status(400).json({ error: "El campo 'duracion_minutos' es obligatorio." });
         }
 
@@ -75,12 +72,10 @@ const actualizarDuracionCancion = async (req, res) => {
             { returnDocument: "after", runValidators: true }
         );
 
-        if (!cancionActualizada) {
-            return res.status(404).json({ error: "Canción no encontrada" });
-        }
+        if (!cancionActualizada) return res.status(404).json({ error: "Canción no encontrada" });
 
         res.json({
-            mensaje: "Duración de la canción actualizada correctamente",
+            mensaje: "Duración actualizada correctamente",
             cancionActualizada
         });
     } catch (error) {
@@ -88,11 +83,3 @@ const actualizarDuracionCancion = async (req, res) => {
         res.status(500).json({ error: "No se pudo actualizar la duración de la canción" });
     }
 };
-
-module.exports = {
-    obtenerCanciones,
-    crearCancion,
-    actualizarCancion,
-    eliminarCancion,
-    actualizarDuracionCancion 
-}
